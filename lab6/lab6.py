@@ -67,10 +67,6 @@ def draw_line(x1, y1, x2, y2, canvas):
   y_ar = [y]  # записуємо початкове значення y
   steps = 4   # кількість вузлових точок
 
-  obj = Point(x, y)
-  obj.setFill('green')
-  obj.draw(canvas)
-
   while t < el:
     error -= es
     if error < 0:
@@ -81,7 +77,6 @@ def draw_line(x1, y1, x2, y2, canvas):
       x += pdx
       y += pdy
     t += 1
-    draw_pixel(x, y, canvas, 'green')
     s_amount = int(dx / steps)
     if dx != 0 and t / s_amount != steps and t % s_amount == 0:
       x_ar.append(x)                          # Заповнюємо масив вузлових точок:
@@ -90,13 +85,12 @@ def draw_line(x1, y1, x2, y2, canvas):
 
   x_ar.append(x2)  # записуємо кінцеве значення x2
   y_ar.append(y2)  # записуємо кінцеве значення y2
-  draw_pixel(x2, y2, canvas, 'green')
 
   if dx != 0:
     lagrange_build(x_ar, y_ar, int(x1), int(x2), sign_x, canvas)
   else:
     for k in range(int(y1), int(y2), sign_y):
-      draw_pixel(x1, k, canvas, 'red')
+      draw_pixel(x1, k, canvas, 'orange')
 
 
 # -------- Алгоритм Лагранжа ------------------
@@ -113,7 +107,7 @@ def lagrange_build(x_ar, y_ar, begin, end, step, canvas):
         if i != j:
           p *= (xp - x_ar[j]) / (x_ar[i] - x_ar[j])
       yp += y_ar[i] * p
-    draw_pixel(xp, yp, canvas, 'red')
+    draw_pixel(xp, yp, canvas, 'orange')
   # ---------------------------------------------
   return lagrange_build
 

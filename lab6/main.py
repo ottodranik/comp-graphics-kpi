@@ -22,8 +22,8 @@ prlpd = np.array([
   [0, st, st, 1]
 ])  # по строках
 
-win = GraphWin("3-D векторного паралелепіпеда аксонометрічна проекція на ХУ", xw, yw, autoflush=False)
-win.setBackground('white')
+win = GraphWin("Фрактали Сєрпінського та Мандельброта", xw, yw, autoflush=False)
+win.setBackground('#253582')
 win.setCoords(-250, -250, 250, 250)
 
 # Намалювати та зберегти фонове зображення ------
@@ -33,7 +33,6 @@ draw_background(win)
 prlpd = dimetric(prlpd, TetaG1, TetaG2)
 colors = [(0, 1, 1), (0, 0, 1), (1, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 1)]
 plrpd_draw_lagrange(prlpd, win, colors)
-
 
 win.getMouse()
 win.close()
