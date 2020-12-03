@@ -4,6 +4,13 @@ import matplotlib.patches as patches
 from matplotlib.colors import to_rgba
 
 
+# Функція проекції на xy, z=0 ------------------------------------------
+def project_xy(figure):
+  f = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1]])  # по строках
+  ft = f.T
+  return figure.dot(ft)
+
+
 # Обертання коло довільної вісі ----------------------------------------
 def rotate_custom(figure, axis, TetaG):
     TetaR = (np.pi*TetaG)/180
@@ -58,7 +65,7 @@ def dimetric(figure, TetaG1, TetaG2):
     ])
     ft2 = f2.T
     prxy2 = prxy1.dot(ft2)
-    return prxy2
+    return project_xy(prxy2)
 
 
 # Функція побудови паралелепіпеда -----------------------------
@@ -87,16 +94,16 @@ def plrpd_draw(prxy, ax):
     Ex = prxy[7, 0]
     Ey = prxy[7, 1]
 
-    obj4 = patches.Polygon([[Mx, My], [Ix, Iy], [Fx, Fy], [Ex, Ey]], fc=to_rgba('#00FF00', 0.9), ec='black')
-    ax.add_patch(obj4)
-    obj6 = patches.Polygon([[Bx, By], [Cx, Cy], [Fx, Fy], [Ix, Iy]], fc=to_rgba('#00FFFF', 0.9), ec='black')
-    ax.add_patch(obj6)
-    obj1 = patches.Polygon([[Ax, Ay], [Bx, By], [Ix, Iy], [Mx, My]], fc=to_rgba('#FF0000', 0.9), ec='black')
-    ax.add_patch(obj1)
-    obj2 = patches.Polygon([[Dx, Dy], [Cx, Cy], [Fx, Fy], [Ex, Ey]], fc=to_rgba('#FF7700', 0.7), ec='black')
-    ax.add_patch(obj2)
-    obj5 = patches.Polygon([[Ax, Ay], [Dx, Dy], [Ex, Ey], [Mx, My]], fc=to_rgba('#00FF77', 0.7), ec='black')
-    ax.add_patch(obj5)
     obj3 = patches.Polygon([[Ax, Ay], [Bx, By], [Cx, Cy], [Dx, Dy]], fc=to_rgba('#FFFF00', 0.7), ec='black')
-    ax.add_patch(obj3)
+    ax.add_patch(obj3)  # bottom
+    obj6 = patches.Polygon([[Bx, By], [Cx, Cy], [Fx, Fy], [Ix, Iy]], fc=to_rgba('#00FFFF', 0.9), ec='black')
+    ax.add_patch(obj6)  # back
+    obj2 = patches.Polygon([[Dx, Dy], [Cx, Cy], [Fx, Fy], [Ex, Ey]], fc=to_rgba('#FF7700', 0.7), ec='black')
+    ax.add_patch(obj2)  # right
+    obj1 = patches.Polygon([[Ax, Ay], [Bx, By], [Ix, Iy], [Mx, My]], fc=to_rgba('#FF0000', 0.9), ec='black')
+    ax.add_patch(obj1)  # left
+    obj5 = patches.Polygon([[Ax, Ay], [Dx, Dy], [Ex, Ey], [Mx, My]], fc=to_rgba('#00FF77', 0.7), ec='black')
+    ax.add_patch(obj5)  # front
+    obj4 = patches.Polygon([[Mx, My], [Ix, Iy], [Fx, Fy], [Ex, Ey]], fc=to_rgba('#00FF00', 0.9), ec='black')
+    ax.add_patch(obj4)  # top
     return plrpd_draw
