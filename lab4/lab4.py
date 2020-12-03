@@ -5,6 +5,13 @@ import math as mt
 import matplotlib.colors as colors
 
 
+# Функція проекції на xy, z=0 ------------------------------------------
+def project_xy(figure):
+  f = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1]])  # по строках
+  ft = f.T
+  return figure.dot(ft)
+
+
 def draw_pixel(x, y, canvas, color='black'):
   obj = Point(x, y)
   obj.setFill(color)
@@ -133,7 +140,7 @@ def dimetric(figure, TetaG1, TetaG2):
   ])
   ft2 = f2.T
   prxy2 = prxy1.dot(ft2)
-  return prxy2
+  return project_xy(prxy2)
 
 
 # Функція побудови паралелепіпеда у пиксельному вигляді -----------------------------

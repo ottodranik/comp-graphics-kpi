@@ -1,7 +1,7 @@
 import numpy as np
 from graphics import GraphWin
-
 from lab4 import plrpd_draw_pixel, dimetric
+
 
 # Параметри паралелепіпеда ------------------------------------
 xw = 600
