@@ -30,7 +30,7 @@ plt.draw()
 plt.pause(3)
 
 for i in range(100):
-  prlpd_final = rotate_custom(prlpd, (0, 10, 10), 7 * i)
+  prlpd_final = rotate_custom(prlpd, (-10, 10, 0), 7 * i)
   prlpd_final = dimetric(prlpd_final, TetaG1, TetaG2)
   plrpd_draw(prlpd_final, ax)
   plt.draw()
