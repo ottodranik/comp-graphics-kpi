@@ -118,7 +118,7 @@ def dimetric(figure, TetaG1, TetaG2):
     ])
     ft2 = f2.T
     prxy2 = prxy1.dot(ft2)
-    return prxy2
+    return project_xy(prxy2)  # проекція
 
 
 # Функція побудови піраміди -----------------------------
@@ -168,7 +168,6 @@ win = GraphWin("3D векторної піраміди аксонометріч�
 win.setBackground('gray')
 win.setCoords(-250, -250, 250, 250)
 final_pyramid = dimetric(pyramid, TetaG1, TetaG2)  # діметрія
-final_pyramid = project_xy(final_pyramid)  # проекція
 pyramid_draw_lagrange(final_pyramid, win)  # малюємо растр та вектор
 
 win.getMouse()
